@@ -50,6 +50,26 @@ fn main() {
         let s1 = String::from("hello");
         let len = calculate_length(&s1);
         println!("length of {} is {}.",s1,len);
+
+        let mut s = String::from("world");
+        {
+            let r1 = &mut s;
+            r1.push_str("hoge");
+        }
+        {
+            let r2 = &mut s;
+            r2.push_str("fuga");
+        }
+        {
+            let mut s = String::from("hello world!");
+            let hello = &s[0..5];
+            let world = &s[6..11];
+            let word = first_word(&s);
+            let word2 = first_word2(&s);            
+            //s.clear();
+            println!("{}",word);
+        }
+
     }
 }
 
@@ -61,4 +81,22 @@ fn s2k(templature: u32) -> u32 {
 }
 fn calculate_length(s: &String) -> usize {
     s.len()
+}
+fn first_word(s: &String) -> &str {
+    let bytes = s.as_bytes();
+    for (i,&item) in bytes.iter().enumerate(){
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+    &s[..]
+}
+fn first_word2(s: &str) -> &str {
+    let bytes = s.as_bytes();
+    for (i,&item) in bytes.iter().enumerate(){
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+    &s[..]
 }
