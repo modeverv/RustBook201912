@@ -32,7 +32,25 @@ fn main() {
         println!("k2s: {}",k2s(100));
         println!("k2s: {}",s2k(100));
     }
-
+    // 所有権
+    {
+        let s = "hello";
+        let mut s = String::from(s);
+        s.push_str(",world");
+        println!("{}",s);
+    }
+    {
+        let x = 5;
+        let y = x;
+        println!("{}",y);
+        // moveされたら後は知らん！
+    }
+    // 参照と借用
+    {
+        let s1 = String::from("hello");
+        let len = calculate_length(&s1);
+        println!("length of {} is {}.",s1,len);
+    }
 }
 
 fn k2s(templature: u32) -> u32 {
@@ -40,4 +58,7 @@ fn k2s(templature: u32) -> u32 {
 }
 fn s2k(templature: u32) -> u32 {
     templature + 10
+}
+fn calculate_length(s: &String) -> usize {
+    s.len()
 }
