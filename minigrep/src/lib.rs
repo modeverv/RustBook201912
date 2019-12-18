@@ -22,6 +22,9 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let mut f = File::open(config.filename)?;
     let mut contents = String::new();
     f.read_to_string(&mut contents)?;
+    for line in search(&config.query,&contents) {
+        println!("{}",line);
+    }
     Ok(())
 }
 
